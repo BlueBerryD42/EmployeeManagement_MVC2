@@ -22,42 +22,41 @@ public class MainController extends HttpServlet {
     private static final String SKILL = "ViewSkill";
     private static final String SKILL_SERVLET = "getSkillServlet";
 
-    private static final String UPDATE_SKILL = "Update";
+    private static final String UPDATE_SKILL = "UPDATE_SKILL";
     private static final String UPDATE_SKILL_SERVLET = "UpdateSkillPage.jsp";
 
-    private static final String SAVE_SKILL = "Save";
+    private static final String SAVE_SKILL = "SAVE_SKILL";
     private static final String SAVE_SKILL_SERVLET = "updateSkillServlet";
 
-    private static final String CREATE_SKILL = "Create";
+    private static final String CREATE_SKILL = "CREATE_SKILL";
     private static final String CREATE_SKILL_SERVLET = "createSkillServlet";
 
     private static final String DEPARTMENT = "ViewDepartment";
     private static final String DEPARTMENT_SERVLET = "getDepartmentServlet";
 
-    private static final String UPDATE_DEPARTMENT = "Edit";
+    private static final String UPDATE_DEPARTMENT = "UPDATE_DEPARTMENT";
     private static final String UPDATE_DEPARTMENT_SERVLET = "updateDepartmentServlet";
 
-    private static final String CREATE_DEPARTMENT = "Add";
+    private static final String CREATE_DEPARTMENT = "CREATE_DEPARTMENT";
     private static final String CREATE_DEPARTMENT_SERVLET = "createDepartmentServlet";
 
     private static final String EMPLOYEE = "ViewEmployee";
     private static final String EMPLOYEE_SERVLET = "getEmployeeServlet";
 
-    private static final String UPDATE_EMPLOYEE = "Update Employee";
-    private static final String UPDATE_EMPLOYEE_SERVLET = "";
+    private static final String UPDATE_EMPLOYEE = "UPDATE_EMPLOYEE_STATUS";
+    private static final String UPDATE_EMPLOYEE_SERVLET = "deleteEmployeeServlet";
 
-    private static final String CREATE_EMPLOYEE = "Create Employee";
-    private static final String CREATE_EMPLOYEE_SERVLET = "";
+    private static final String CREATE_EMPLOYEE = "CREATE_EMPLOYEE";
+    private static final String CREATE_EMPLOYEE_SERVLET = "createEmployeeServlet";
 
-    private static final String DELETE_EMPLOYEE = "Delete Employee";
-    private static final String DELETE_EMPLOYEE_SERVLET = "";
+    private static final String DELETE_EMPLOYEE = "UPDATE_EMPLOYEE_STATUS";
+    private static final String DELETE_EMPLOYEE_SERVLET = "deleteEmployeeServlet";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String url = WELCOME;
         try {
-
             //Action is the data being sent between each page to do a function
             //Action will be null when the project first initiallized
             String action = request.getParameter("action");
@@ -77,6 +76,10 @@ public class MainController extends HttpServlet {
                 url = CREATE_DEPARTMENT_SERVLET;
             } else if (EMPLOYEE.equals(action)) {
                 url = EMPLOYEE_SERVLET;
+            } else if (DELETE_EMPLOYEE.equals(action)) {
+                url = (DELETE_EMPLOYEE_SERVLET);
+            } else if (CREATE_EMPLOYEE.equals(action)) {
+                url = (CREATE_EMPLOYEE_SERVLET);
             }
         } catch (Exception e) {
             log("Error at MainController" + e.toString());

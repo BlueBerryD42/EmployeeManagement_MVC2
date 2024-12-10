@@ -3,37 +3,30 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package controllers.skill;
+package controllers.employee;
 
-import dao.SkillDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author ASUS
  */
-public class getSkillServlet extends HttpServlet {
+public class updateEmployeeServlet extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try {
-            SkillDAO d = new SkillDAO();
-            ArrayList kq = d.getSkills();
-            //Save kq to request to send to Skill Management Page for display
-            HttpSession session = request.getSession();
-            session.setAttribute("listSkills", kq);
+            //Not yet available
         } catch (Exception e) {
-            log("Error at get skill servlet", e);
+            log("Error at update employee servlet" + e.toString());
         } finally {
-            request.getRequestDispatcher("SkillManagementPage.jsp").forward(request, response);
+
         }
     }
 

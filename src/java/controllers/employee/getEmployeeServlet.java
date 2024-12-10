@@ -5,10 +5,15 @@
  */
 package controllers.employee;
 
+import dao.DepartmentDAO;
 import dao.EmployeeDAO;
+import dao.SkillDAO;
+import dto.Department;
+import dto.Employee;
+import dto.Skill;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -23,11 +28,25 @@ public class getEmployeeServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            EmployeeDAO d = new EmployeeDAO();
-            ArrayList emp = d.getEmployee();
-            request.setAttribute("listEmployee", emp);
-            request.getRequestDispatcher("EmployeeManagementPage.jsp").forward(request, response);
+        try {
+            String search = request.getParameter("search");
+
+            EmployeeDAO empDAO = new EmployeeDAO();
+            ArrayList<Employee> empList = empDAO.getEmployee(search);
+            request.setAttribute("listEmployee", empList);
+
+            DepartmentDAO depDAO = new DepartmentDAO();
+            ArrayList<Department> depList = depDAO.getDepartment();
+            request.getSession().setAttribute("listDepartments", depList);
+
+            SkillDAO skillDAO = new SkillDAO();
+            ArrayList<Skill> skillList = skillDAO.getSkills();
+            request.getSession().setAttribute("listSkills", skillList);
+
+            RequestDispatcher dispatcher = request.getRequestDispatcher("EmployeeManagementPage.jsp");
+            dispatcher.forward(request, response);
+        } catch (Exception e) {
+            log("Error at get Employee servlet" + e.toString());
         }
     }
 

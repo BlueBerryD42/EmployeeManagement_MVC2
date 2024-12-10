@@ -11,14 +11,18 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta charset="UTF-8">
         <title>Skill Management Page</title>
-        <link rel="stylesheet" type="text/css" href="style/skill.css">
+        <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/style/skill.css">
     </head>
     <body>
-        <!--        This is a place for displaying all skill-->
-        <h1>List of available skills</h1>
-        <c:if test="${requestScope.listSkills != null}">
+        <h1>List of Available Skills</h1>
+
+        <c:if test="${empty sessionScope.listSkills}">
+            <p>No skills available to display.</p>
+        </c:if>
+
+        <c:if test="${not empty sessionScope.listSkills}">
             <table id="skillsTable" class="custom-table">
                 <thead>
                     <tr>
@@ -29,19 +33,18 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <c:forEach var="skill" items="${requestScope.listSkills}">
+                    <c:forEach var="skill" items="${sessionScope.listSkills}">
                         <tr>
                     <form action="MainController" method="POST">
-                        <input type="hidden" value="${skill.id}" name="id"/>
-                        <input type="hidden" value="${skill.name}" name="name"/>
-                        <input type="hidden" value="${skill.note}" name="note"/>
-                        <input type="hidden" value="Update" name="action"/>
+                        <input type="hidden" value="${skill.id}" name="id" />
+                        <input type="hidden" value="${skill.name}" name="name" />
+                        <input type="hidden" value="${skill.note}" name="note" />
+                        <input type="hidden" value="UPDATE_SKILL" name="action" />
                         <td>${skill.id}</td>
                         <td>${skill.name}</td>
                         <td>${skill.note}</td>
                         <td>
-                            <input 
-                                type="submit" value="Update"/>
+                            <input type="submit" value="Update" />
                         </td>
                     </form>
                 </tr>
@@ -51,14 +54,21 @@
 </c:if>
 
 
-<!--        This is form for creating skill-->
-
-<h1>Create new skill</h1>
-<form action= "MainController" method = "POST">
-    Skill<p><input type = "text" name= "skillName" placeholder = "Enter new skill name" required = "" maxlength = "30"></p>
-    Description<p><textarea name = "note" placeholder="Enter skill description"></textarea></p>
-    <p><input type = "submit" value = "Create" name = "action" /></p>
+<h1>Create New Skill</h1>
+<form action="MainController" method="POST">
+    <label>Skill:</label> </br>
+    <input type="text" name="skillName" placeholder="Enter new skill name" required maxlength="30">
+    <br>
+    <label>Description:</label> </br>
+    <textarea name="note" placeholder="Enter skill description"></textarea>
+    <br> 
+    <input type="hidden" value="CREATE_SKILL" name="action" />
+    <input type="submit" value="Create" />
 </form>
-<c:if test="${requestScope.Mssg != null}"> ${requestScope.Mssg.mssg}</c:if>
+</br>
+<button onclick="window.location.href = 'MainController?action=index.html';">Go Back</button>
+<c:if test="${not empty requestScope.Mssg}">
+    <p>${requestScope.Mssg}</p>
+</c:if>
 </body>
 </html>

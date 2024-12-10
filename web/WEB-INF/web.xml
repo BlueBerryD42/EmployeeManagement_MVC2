@@ -32,6 +32,18 @@
         <servlet-name>createDepartmentServlet</servlet-name>
         <servlet-class>controllers.department.createDepartmentServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>deleteEmployeeServlet</servlet-name>
+        <servlet-class>controllers.employee.deleteEmployeeServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>updateEmployeeServlet</servlet-name>
+        <servlet-class>controllers.employee.updateEmployeeServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>createEmployeeServlet</servlet-name>
+        <servlet-class>controllers.employee.createEmployeeServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>createSkillServlet</servlet-name>
         <url-pattern>/createSkillServlet</url-pattern>
@@ -63,6 +75,18 @@
     <servlet-mapping>
         <servlet-name>createDepartmentServlet</servlet-name>
         <url-pattern>/createDepartmentServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>deleteEmployeeServlet</servlet-name>
+        <url-pattern>/deleteEmployeeServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>updateEmployeeServlet</servlet-name>
+        <url-pattern>/updateEmployeeServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>createEmployeeServlet</servlet-name>
+        <url-pattern>/createEmployeeServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

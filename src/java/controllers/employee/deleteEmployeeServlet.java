@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package controllers.department;
+package controllers.employee;
 
-import dao.DepartmentDAO;
+import dao.EmployeeDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
@@ -20,38 +20,49 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author ASUS
  */
-public class updateDepartmentServlet extends HttpServlet {
+public class deleteEmployeeServlet extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, SQLException {
+            throws ServletException, IOException, ClassNotFoundException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
+
         try (PrintWriter out = response.getWriter()) {
-            String id = request.getParameter("id");
-            String name = request.getParameter("depName");
-            String note = request.getParameter("note");
-            int kq = 0;
+            String no = request.getParameter("no");
+            String current = request.getParameter("status");
             boolean error = false;
-            if (id != null && name != null && note != null) {
-                DepartmentDAO d = new DepartmentDAO();
-                kq = d.updateDepartment(Integer.parseInt(id.trim()), name, note);
-                if (kq == 1) {
-                    request.getRequestDispatcher("getDepartmentServlet").forward(request, response);
-                    return;
-                } else {
+
+            if (no != null && current != null) {
+                try {
+                    int employeeNo = Integer.parseInt(no);
+                    int currentStatus = Integer.parseInt(current);
+
+                    EmployeeDAO dao = new EmployeeDAO();
+                    int result = dao.deactivateEmployee(employeeNo, currentStatus);
+
+                    if (result > 0) {
+                        // Redirect to fetch updated employee list
+                        request.getRequestDispatcher("getEmployeeServlet").forward(request, response);
+                        return;
+                    } else {
+                        error = true;
+                        request.setAttribute("Mssg", "Failed to update employee status.");
+                    }
+                } catch (NumberFormatException e) {
                     error = true;
+                    request.setAttribute("Mssg", "Error processing request: " + e.getMessage());
                 }
             } else {
                 error = true;
-            }
-            if (error == true) {
-                request.setAttribute("Mssg", "Error updating department");
-                request.getRequestDispatcher("DepartmentManagementPage.jsp").forward(request, response);
+                request.setAttribute("Mssg", "Invalid input parameters.");
             }
 
+            if (error) {
+                request.getRequestDispatcher("EmployeeManagementPage.jsp").forward(request, response);
+            }
         }
     }
 
-// <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *
@@ -65,8 +76,10 @@ public class updateDepartmentServlet extends HttpServlet {
             throws ServletException, IOException {
         try {
             processRequest(request, response);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(deleteEmployeeServlet.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
-            Logger.getLogger(updateDepartmentServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(deleteEmployeeServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -83,8 +96,10 @@ public class updateDepartmentServlet extends HttpServlet {
             throws ServletException, IOException {
         try {
             processRequest(request, response);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(deleteEmployeeServlet.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
-            Logger.getLogger(updateDepartmentServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(deleteEmployeeServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

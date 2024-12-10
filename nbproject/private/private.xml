@@ -3,9 +3,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/ASUS/Documents/School_Mats/PRJ301_3W_VanTTN/PRJ301_DepartmentManagement/web/SkillManagementPage.jsp</file>
+            <file>file:/C:/Users/ASUS/Documents/School_Mats/PRJ301_3W_VanTTN/PRJ301_DepartmentManagement/src/java/controllers/employee/getEmployeeServlet.java</file>
+            <file>file:/C:/Users/ASUS/Documents/School_Mats/PRJ301_3W_VanTTN/PRJ301_DepartmentManagement/src/java/controllers/skill/getSkillServlet.java</file>
+            <file>file:/C:/Users/ASUS/Documents/School_Mats/PRJ301_3W_VanTTN/PRJ301_DepartmentManagement/src/java/controllers/mainController/MainController.java</file>
+            <file>file:/C:/Users/ASUS/Documents/School_Mats/PRJ301_3W_VanTTN/PRJ301_DepartmentManagement/web/DepartmentManagementPage.jsp</file>
             <file>file:/C:/Users/ASUS/Documents/School_Mats/PRJ301_3W_VanTTN/PRJ301_DepartmentManagement/web/EmployeeManagementPage.jsp</file>
-            <file>file:/C:/Users/ASUS/Documents/School_Mats/PRJ301_3W_VanTTN/PRJ301_DepartmentManagement/src/java/dto/Department.java</file>
+            <file>file:/C:/Users/ASUS/Documents/School_Mats/PRJ301_3W_VanTTN/PRJ301_DepartmentManagement/src/java/dao/EmployeeDAO.java</file>
+            <file>file:/C:/Users/ASUS/Documents/School_Mats/PRJ301_3W_VanTTN/PRJ301_DepartmentManagement/src/java/controllers/employee/createEmployeeServlet.java</file>
         </group>
     </open-files>
 </project-private>
